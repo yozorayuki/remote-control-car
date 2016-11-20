@@ -286,7 +286,7 @@ uint8_t isAutoControl(void) {
  *         PART3LEFT  (0): Means turning left at part 3
  */
 uint8_t getPart3Direction(void) {
-    if (getButtonData() == PSB_SELECT)
+    if (getButtonData() == PSB_L2)
         part3Dir = PART3RIGHT;
     return part3Dir;
 }

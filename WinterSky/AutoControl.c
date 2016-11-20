@@ -5,7 +5,6 @@
 #include "movement.h"
 #include <stdio.h>
 
-#include "sys.h"
 #include "mpu6050.h" 
 #include "mpuiic.h"
 #include "inv_mpu.h"

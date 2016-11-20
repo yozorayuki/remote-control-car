@@ -1,10 +1,7 @@
 #include "ADCConfig.h"
 
 #include "delay.h"
-
 #include <stdio.h>
-
-#include "WifiControl.h"
 
 
 u16 AD_Value[12] = {0};

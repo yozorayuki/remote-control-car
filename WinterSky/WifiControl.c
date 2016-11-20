@@ -1,7 +1,7 @@
 #include "WifiControl.h"
+
 #include "UsartConfig.h"
 #include "delay.h"
-
 #include <stdio.h>
 
 u8 bATOk = 0, bConnected = 0, bSending;
