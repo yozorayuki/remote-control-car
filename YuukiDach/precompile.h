@@ -1,6 +1,10 @@
 #ifndef _PRECOMPILE_H_
 #define _PRECOMPILE_H_
 
+#define __ON__           1
+#define __OFF__          0
+#define __DEBUG__        (__ON__)
+
 #define byte unsigned char
 #define uchar unsigned char
 #define ushort unsigned short

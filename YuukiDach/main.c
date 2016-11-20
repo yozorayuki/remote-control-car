@@ -18,73 +18,62 @@
 
 #include "controller.h"
 #include "delay.h"
-#include "usartconfig.h"
+#include "usartconf.h"
 #include "movement.h"
 #include "mechanical_arm.h"
 #include "SysConfig.h"
 #include "WIFIControl.h"
 #include "ADCConfig.h"
-#include "AutoControl.h"
+#include "mpu6050.h"
+//#include "AutoControl.h"
 #include "precompile.h"
 
-#include "sys.h"
-#include "mpu6050.h" 
-#include "mpuiic.h"
-#include "inv_mpu.h"
-#include "inv_mpu_dmp_motion_driver.h" 
-
-
 uint8_t dir = PART3LEFT;
+float lastYaw, yaw;
 
 int main(void) {
     delay_init(72);
-	
+
     Controller_Config();
     Tire_Config();
     Arm_Config();
-	ADC_Config();
-    AutoControlConfig();
-	
+    ADC_Config();
+    MPU_Init();
+
+#if (__DEBUG__ == __ON__)
     USART1_Config();
     NVIC_Config();
     delay_ms(100);
     WIFI_ConnectToServer();
     delay_ms(100);
     printf("\nis connected!\n");
-	
+#endif
+
     Ultrasonic_Init();
-	
-	MPU_Init();					//初始化MPU6050
-	while(mpu_dmp_init()){}
-	
+
     putArmHigh();
-	
-	int str = 0;
-	
+
     while(1){
-        if(!isAutoControl()){
-            carGo(getButtonData());
-            armControl(getButtonData());
+        if (!isAutoControl()) {
+            carGo (getButtonData ());
+          
+#if (__DEBUG__ == __ON__)          
+            uint8_t mode = getButtonData () ;
+            printf("sonic: %5d\n", Ultrasonic_Trig(GPIO_Pin_7));
+            delay_ms(100);
+            if ( mode == PSB_START )
+                printf ( "7 : %u\r\n" , Ultrasonic_Trig ( GPIO_Pin_7 ) ) ;
+            else if ( mode == PSB_L2 )
+                printf ( "8 : %u\r\n" , Ultrasonic_Trig ( GPIO_Pin_8 ) ) ;
+            else if ( mode == PSB_R2 )
+                printf ( "9 : %u\r\n" , Ultrasonic_Trig ( GPIO_Pin_9 ) ) ;
+#endif
+  
+            //armControl(getButtonData());  
             dir = getPart3Direction();
-			
-			if(getButtonData() == PSB_L1) {
-				ADC_PrintValue();
-				while(getButtonData() == PSB_L1);
-			}
-			
-			str = 0;
-			
-        } else if (isAutoControl()){
-			if(!str) {
-				str = 1;
-				printf(":MPU6050 INIT\n");
-				
-				MPU_Init();					//初始化MPU6050
-				while(mpu_dmp_init()){}
-			}
-			
-			AutoControl();
-            //Final_Charge (PART3RIGHT); // dir == PART3LEFT(0) or PART3RIGHT(1)
+            
+        } else if (isAutoControl()) {
+            Final_Charge (dir); // dir == PART3LEFT(0) or PART3RIGHT(1)
         } 
     }
 }
