@@ -21,4 +21,3 @@
 .\objects\adcconfig.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\adcconfig.o: .\YuukiDach\delay.h
 .\objects\adcconfig.o: D:\Program Files\Keil uVision5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\adcconfig.o: WinterSky\WifiControl.h

@@ -1,8 +1,0 @@
---c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I.\MPU6050 -I.\SYSTEM\sys -I.\WinterSky -I.\YuukiDach
--I "D:\WinterSky\Documents\Keil uVision5\Remote-Control-Car-master\RTE"
--I "D:\WinterSky\Documents\Keil uVision5\Remote-Control-Car-master\RTE\Device\STM32F103VC"
--I "D:\Program Files\Keil uVision5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include"
--I "D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include"
--I "D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc"
--D__UVISION_VERSION="514" -D_RTE_ -DSTM32F10X_HD
--o .\objects\stm32f10x_usart.o --omf_browse .\objects\stm32f10x_usart.crf --depend .\objects\stm32f10x_usart.d "D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\src\stm32f10x_usart.c"

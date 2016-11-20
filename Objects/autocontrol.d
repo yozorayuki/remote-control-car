@@ -23,8 +23,8 @@
 .\objects\autocontrol.o: .\YuukiDach\delay.h
 .\objects\autocontrol.o: .\YuukiDach\movement.h
 .\objects\autocontrol.o: D:\Program Files\Keil uVision5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\autocontrol.o: .\SYSTEM\sys\sys.h
 .\objects\autocontrol.o: .\MPU6050\mpu6050.h
 .\objects\autocontrol.o: .\MPU6050\mpuiic.h
+.\objects\autocontrol.o: .\SYSTEM\sys\sys.h
 .\objects\autocontrol.o: .\MPU6050\inv_mpu.h
 .\objects\autocontrol.o: .\MPU6050\inv_mpu_dmp_motion_driver.h

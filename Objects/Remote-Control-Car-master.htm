@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Remote-Control-Car-master.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Remote-Control-Car-master.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sun Nov 20 10:58:30 2016
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sun Nov 20 11:59:22 2016
 <BR><P>
 <H3>Maximum Stack Usage =        376 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -353,9 +353,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getYaw
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
+<BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
 <LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;accel_self_test
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getYaw
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Finding
 </UL>
 
@@ -366,11 +366,11 @@ Global Symbols
 <P><STRONG><a name="[115]"></a>__aeabi_fmul</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, fmul.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_fmul
 </UL>
-<BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_tap_thresh
+<BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
+<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_accel_prod_shift
+<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_tap_thresh
 <LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;run_self_test
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getYaw
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
-<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_accel_prod_shift
 </UL>
 
 <P><STRONG><a name="[57]"></a>__aeabi_fdiv</STRONG> (Thumb, 124 bytes, Stack size 8 bytes, fdiv.o(.text))
@@ -378,10 +378,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_round
 </UL>
-<BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_tap_thresh
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getYaw
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
+<BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
 <LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;accel_self_test
+<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_tap_thresh
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getYaw
 </UL>
 
 <P><STRONG><a name="[58]"></a>__aeabi_dadd</STRONG> (Thumb, 322 bytes, Stack size 48 bytes, dadd.o(.text))
@@ -441,10 +441,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;run_self_test
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getYaw
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
+<BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
 <LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;accel_self_test
+<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;run_self_test
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getYaw
 </UL>
 
 <P><STRONG><a name="[62]"></a>__aeabi_ui2f</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, ffltui.o(.text))
@@ -452,8 +452,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_tap_thresh
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
+<BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
+<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_tap_thresh
 </UL>
 
 <P><STRONG><a name="[13b]"></a>__aeabi_f2iz</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, ffixi.o(.text))
@@ -731,16 +731,16 @@ Global Symbols
 <P><STRONG><a name="[68]"></a>GPIO_Init</STRONG> (Thumb, 278 bytes, Stack size 24 bytes, stm32f10x_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_I2C_GPIO_Config
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Config
+<BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Init
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_I2C_GPIO_Config
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tire_Config
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControlConfig
-<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controlModeConfirm_Config
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Controller_Config
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Init
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Config
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControlConfig
 </UL>
 
 <P><STRONG><a name="[9c]"></a>GPIO_PinRemapConfig</STRONG> (Thumb, 138 bytes, Stack size 20 bytes, stm32f10x_gpio.o(i.GPIO_PinRemapConfig))
@@ -881,8 +881,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
+<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
 </UL>
 
 <P><STRONG><a name="[95]"></a>MPU_IIC_NAck</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, mpuiic.o(i.MPU_IIC_NAck))
@@ -988,13 +988,13 @@ Global Symbols
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Send_Byte
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Read_Byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_bypass
+<BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_st_biases
+<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_accel_prod_shift
+<LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_bypass
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_read_mem
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_read_fifo_stream
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_init
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_st_biases
-<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_accel_prod_shift
 </UL>
 
 <P><STRONG><a name="[9f]"></a>MPU_Set_Accel_Fsr</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, mpu6050.o(i.MPU_Set_Accel_Fsr))
@@ -1038,11 +1038,11 @@ Global Symbols
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Start
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Send_Byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
-<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Rate
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_LPF
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Gyro_Fsr
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Set_Accel_Fsr
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
 </UL>
 
 <P><STRONG><a name="[a4]"></a>MPU_Write_Len</STRONG> (Thumb, 96 bytes, Stack size 24 bytes, mpu6050.o(i.MPU_Write_Len))
@@ -1053,7 +1053,9 @@ Global Symbols
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Start
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Send_Byte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
+<BR>[Called By]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_int_enable
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_st_biases
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_write_mem
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sensors
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sample_rate
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_lpf
@@ -1067,8 +1069,6 @@ Global Symbols
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_lp_accel_mode
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_load_firmware
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_init
-<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_int_enable
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_st_biases
 </UL>
 
 <P><STRONG><a name="[3]"></a>MemManage_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_it.o(i.MemManage_Handler))
@@ -1203,9 +1203,9 @@ Global Symbols
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_I2C_BeginTransmission
 </UL>
 <BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmLow
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmHigh
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handOpen
 <LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handGrab
-<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmHigh
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stopTheCar
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setSpeed
 </UL>
@@ -1252,16 +1252,16 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[67]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_I2C_GPIO_Config
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Config
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Init
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PCA9685_I2C_GPIO_Config
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tire_Config
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControlConfig
-<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controlModeConfirm_Config
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Controller_Config
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_IIC_Init
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Config
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControlConfig
 </UL>
 
 <P><STRONG><a name="[90]"></a>RCC_GetClocksFreq</STRONG> (Thumb, 192 bytes, Stack size 12 bytes, stm32f10x_rcc.o(i.RCC_GetClocksFreq))
@@ -1565,14 +1565,14 @@ Global Symbols
 <P><STRONG><a name="[77]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf8.o(i.__0printf$8))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WIFI_ConnectToServer
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControl
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_PrintValue
-<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_PrintValue
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_init
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WIFI_ConnectToServer
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tracking
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Seeking
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Finding
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControl
 </UL>
 
 <P><STRONG><a name="[fa]"></a>__ARM_fpclassify</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, fpclassify.o(i.__ARM_fpclassify))
@@ -1622,9 +1622,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = armControl &rArr; putArmLow &rArr; handOpen &rArr; PCA9685_SetOutput &rArr; PCA9685_I2C_Write &rArr; I2C_CheckEvent
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmLow
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmHigh
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handOpen
 <LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;handGrab
-<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmHigh
 </UL>
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1686,16 +1686,16 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[89]"></a>delay_ms</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, delay.o(i.delay_ms))
-<BR><BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmLow
+<BR><BR>[Called By]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_st_biases
+<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmLow
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmHigh
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WIFI_ConnectToServer
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
-<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sensors
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_bypass
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_reset_fifo
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_init
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_st_biases
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WIFI_ConnectToServer
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Finding
 </UL>
 
@@ -1895,9 +1895,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendCmd2MCU
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clrPS2Buff
 </UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isAutoControl
+<BR>[Called By]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isAutoControl
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getPart3Direction
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[11d]"></a>getPart3Direction</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, controller.o(i.getPart3Direction))
@@ -1968,27 +1968,27 @@ Global Symbols
 <P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 178 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 376<LI>Call Chain = main &rArr; AutoControl &rArr; Seeking &rArr; Finding &rArr; getYaw &rArr; atan2 &rArr; atan &rArr; __kernel_poly &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmHigh
-<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
+<BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Init
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;carGo
-<LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;armControl
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WIFI_ConnectToServer
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Config
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tire_Config
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Config
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControlConfig
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControl
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putArmHigh
+<LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;armControl
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Arm_Config
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_PrintValue
-<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
 <LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;isAutoControl
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getPart3Direction
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getButtonData
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Controller_Config
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_PrintValue
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Config
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Init
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WIFI_ConnectToServer
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_Config
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Config
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControlConfig
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AutoControl
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
@@ -2000,17 +2000,17 @@ Global Symbols
 <P><STRONG><a name="[126]"></a>mpu_configure_fifo</STRONG> (Thumb, 106 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_configure_fifo))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = mpu_configure_fifo &rArr; set_int_enable &rArr; MPU_Write_Len &rArr; MPU_IIC_Wait_Ack &rArr; MPU_IIC_Stop &rArr; MPU_IIC_Delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_reset_fifo
-<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_int_enable
+<BR>[Calls]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_int_enable
+<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_reset_fifo
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
-<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_run_self_test
+<BR>[Called By]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_run_self_test
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_lp_accel_mode
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_init
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
 </UL>
 
 <P><STRONG><a name="[125]"></a>mpu_dmp_init</STRONG> (Thumb, 154 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_dmp_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 280<LI>Call Chain = mpu_dmp_init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; MPU_Write_Len &rArr; MPU_IIC_Wait_Ack &rArr; MPU_IIC_Stop &rArr; MPU_IIC_Delay
+<BR><BR>[Stack]<UL><LI>Max Depth = 280<LI>Call Chain = mpu_dmp_init &rArr; run_self_test &rArr; mpu_run_self_test &rArr; get_st_biases &rArr; __aeabi_ldivmod &rArr; __aeabi_uldivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_orientation
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_fifo_rate
@@ -2127,9 +2127,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[135]"></a>mpu_run_self_test</STRONG> (Thumb, 278 bytes, Stack size 88 bytes, inv_mpu.o(i.mpu_run_self_test))
-<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; MPU_Write_Len &rArr; MPU_IIC_Wait_Ack &rArr; MPU_IIC_Stop &rArr; MPU_IIC_Delay
+<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = mpu_run_self_test &rArr; get_st_biases &rArr; __aeabi_ldivmod &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sensors
+<BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_st_biases
+<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;accel_self_test
+<LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sensors
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sample_rate
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_lpf
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_gyro_fsr
@@ -2141,9 +2144,6 @@ Global Symbols
 <LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_get_fifo_config
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_get_accel_fsr
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_configure_fifo
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gyro_self_test
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_st_biases
-<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;accel_self_test
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;run_self_test
 </UL>
@@ -2171,14 +2171,14 @@ Global Symbols
 <P><STRONG><a name="[12c]"></a>mpu_set_dmp_state</STRONG> (Thumb, 138 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_dmp_state))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; MPU_Write_Len &rArr; MPU_IIC_Wait_Ack &rArr; MPU_IIC_Stop &rArr; MPU_IIC_Delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Len
+<BR>[Calls]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_int_enable
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Len
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_sample_rate
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_bypass
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_reset_fifo
-<LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_int_enable
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
-<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_run_self_test
+<BR>[Called By]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_run_self_test
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
 </UL>
 
 <P><STRONG><a name="[12d]"></a>mpu_set_gyro_fsr</STRONG> (Thumb, 132 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_gyro_fsr))
@@ -2217,10 +2217,10 @@ Global Symbols
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_lpf
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_lp_accel_mode
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
-<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_dmp_state
+<BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_dmp_state
 <LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_run_self_test
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_init
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
 </UL>
 
 <P><STRONG><a name="[129]"></a>mpu_set_sensors</STRONG> (Thumb, 202 bytes, Stack size 16 bytes, inv_mpu.o(i.mpu_set_sensors))
@@ -2230,9 +2230,9 @@ Global Symbols
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MPU_Write_Len
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_set_int_latched
 </UL>
-<BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
-<LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_run_self_test
+<BR>[Called By]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_run_self_test
 <LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_init
+<LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_dmp_init
 </UL>
 
 <P><STRONG><a name="[fe]"></a>mpu_write_mem</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, inv_mpu.o(i.mpu_write_mem))
@@ -2284,7 +2284,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[12b]"></a>run_self_test</STRONG> (Thumb, 106 bytes, Stack size 48 bytes, inv_mpu.o(i.run_self_test))
-<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = run_self_test &rArr; mpu_run_self_test &rArr; mpu_set_dmp_state &rArr; mpu_set_sample_rate &rArr; mpu_lp_accel_mode &rArr; mpu_configure_fifo &rArr; set_int_enable &rArr; MPU_Write_Len &rArr; MPU_IIC_Wait_Ack &rArr; MPU_IIC_Stop &rArr; MPU_IIC_Delay
+<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = run_self_test &rArr; mpu_run_self_test &rArr; get_st_biases &rArr; __aeabi_ldivmod &rArr; __aeabi_uldivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dmp_set_gyro_bias
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
@@ -2439,13 +2439,13 @@ Local Symbols
 <P><STRONG><a name="[f1]"></a>accel_self_test</STRONG> (Thumb, 164 bytes, Stack size 48 bytes, inv_mpu.o(i.accel_self_test))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = accel_self_test &rArr; get_accel_prod_shift &rArr; MPU_Read_Len &rArr; MPU_IIC_Read_Byte &rArr; MPU_IIC_NAck &rArr; MPU_IIC_Delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
+<BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_accel_prod_shift
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
 <LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmpeq
-<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_accel_prod_shift
 </UL>
 <BR>[Called By]<UL><LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mpu_run_self_test
 </UL>

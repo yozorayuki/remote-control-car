@@ -27,14 +27,7 @@ Project File Date:  11/20/2016
 <h2>Output:</h2>
 *** Using Compiler 'V5.05 update 1 (build 106)', folder: 'D:\Program Files\Keil uVision5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling main.c...
-compiling movement.c...
-compiling inv_mpu.c...
-compiling inv_mpu_dmp_motion_driver.c...
-compiling mpu6050.c...
-compiling LedConfig.c...
-compiling UsartConfig.c...
-compiling WifiControl.c...
+compiling Main.c...
 linking...
 Program Size: Code=26832 RO-data=3720 RW-data=412 ZI-data=1076  
 FromELF: creating hex file...
@@ -50,19 +43,19 @@ Package Vendor: ARM
 
 Package Vendor: Keil
                 http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.1.0.pack
-                Keil::Device:Startup:1.0.0
+                Keil::Device:StdPeriph Drivers:EXTI:3.5.0
                 STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
-   * Component: Startup Version: 1.0.0
-   * Component: USART Version: 3.5.0
-   * Component: TIM Version: 3.5.0
    * Component: EXTI Version: 3.5.0
-   * Component: Framework Version: 3.5.1
-   * Component: ADC Version: 3.5.0
    * Component: GPIO Version: 3.5.0
-   * Component: I2C Version: 3.5.0
-   * Component: DMA Version: 3.5.0
-   * Component: RCC Version: 3.5.0
+   * Component: Framework Version: 3.5.1
+   * Component: TIM Version: 3.5.0
    * Component: Flash Version: 3.5.0
+   * Component: ADC Version: 3.5.0
+   * Component: USART Version: 3.5.0
+   * Component: DMA Version: 3.5.0
+   * Component: I2C Version: 3.5.0
+   * Component: RCC Version: 3.5.0
+   * Component: Startup Version: 1.0.0
 
 <h2>Collection of Component include folders:</h2>
   D:\WinterSky\Documents\Keil uVision5\Remote-Control-Car-master\RTE
@@ -76,54 +69,54 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:3.40.0
       Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
 
-   * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
-      Source file:   Device\Source\ARM\startup_stm32f10x_hd.s
-      Source file:   Device\Source\system_stm32f10x.c
-      Include file:  RTE_Driver\Config\RTE_Device.h
+   * Component: Keil::Device:StdPeriph Drivers:EXTI:3.5.0
+      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_exti.h
+      Source file:   Device\StdPeriph_Driver\src\stm32f10x_exti.c
 
-   * Component: Keil::Device:StdPeriph Drivers:USART:3.5.0
-      Source file:   Device\StdPeriph_Driver\src\stm32f10x_usart.c
-      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_usart.h
+   * Component: Keil::Device:StdPeriph Drivers:GPIO:3.5.0
+      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_gpio.h
+      Source file:   Device\StdPeriph_Driver\src\stm32f10x_gpio.c
+
+   * Component: Keil::Device:StdPeriph Drivers:Framework:3.5.1
+      Source file:   Device\StdPeriph_Driver\templates\stm32f10x_conf.h
+      Include file:  Device\StdPeriph_Driver\templates\stm32f10x_it.h
+      Include file:  Device\StdPeriph_Driver\inc\misc.h
+      Source file:   Device\StdPeriph_Driver\templates\stm32f10x_it.c
+      Source file:   Device\StdPeriph_Driver\src\misc.c
 
    * Component: Keil::Device:StdPeriph Drivers:TIM:3.5.0
       Source file:   Device\StdPeriph_Driver\src\stm32f10x_tim.c
       Include file:  Device\StdPeriph_Driver\inc\stm32f10x_tim.h
 
-   * Component: Keil::Device:StdPeriph Drivers:EXTI:3.5.0
-      Source file:   Device\StdPeriph_Driver\src\stm32f10x_exti.c
-      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_exti.h
-
-   * Component: Keil::Device:StdPeriph Drivers:Framework:3.5.1
-      Include file:  Device\StdPeriph_Driver\templates\stm32f10x_it.h
-      Include file:  Device\StdPeriph_Driver\inc\misc.h
-      Source file:   Device\StdPeriph_Driver\templates\stm32f10x_conf.h
-      Source file:   Device\StdPeriph_Driver\src\misc.c
-      Source file:   Device\StdPeriph_Driver\templates\stm32f10x_it.c
+   * Component: Keil::Device:StdPeriph Drivers:Flash:3.5.0
+      Source file:   Device\StdPeriph_Driver\src\stm32f10x_flash.c
+      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_flash.h
 
    * Component: Keil::Device:StdPeriph Drivers:ADC:3.5.0
-      Source file:   Device\StdPeriph_Driver\src\stm32f10x_adc.c
       Include file:  Device\StdPeriph_Driver\inc\stm32f10x_adc.h
+      Source file:   Device\StdPeriph_Driver\src\stm32f10x_adc.c
 
-   * Component: Keil::Device:StdPeriph Drivers:GPIO:3.5.0
-      Source file:   Device\StdPeriph_Driver\src\stm32f10x_gpio.c
-      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_gpio.h
+   * Component: Keil::Device:StdPeriph Drivers:USART:3.5.0
+      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_usart.h
+      Source file:   Device\StdPeriph_Driver\src\stm32f10x_usart.c
+
+   * Component: Keil::Device:StdPeriph Drivers:DMA:3.5.0
+      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_dma.h
+      Source file:   Device\StdPeriph_Driver\src\stm32f10x_dma.c
 
    * Component: Keil::Device:StdPeriph Drivers:I2C:3.5.0
       Source file:   Device\StdPeriph_Driver\src\stm32f10x_i2c.c
       Include file:  Device\StdPeriph_Driver\inc\stm32f10x_i2c.h
 
-   * Component: Keil::Device:StdPeriph Drivers:DMA:3.5.0
-      Source file:   Device\StdPeriph_Driver\src\stm32f10x_dma.c
-      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_dma.h
-
    * Component: Keil::Device:StdPeriph Drivers:RCC:3.5.0
       Include file:  Device\StdPeriph_Driver\inc\stm32f10x_rcc.h
       Source file:   Device\StdPeriph_Driver\src\stm32f10x_rcc.c
 
-   * Component: Keil::Device:StdPeriph Drivers:Flash:3.5.0
-      Source file:   Device\StdPeriph_Driver\src\stm32f10x_flash.c
-      Include file:  Device\StdPeriph_Driver\inc\stm32f10x_flash.h
+   * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Source file:   Device\Source\system_stm32f10x.c
+      Source file:   Device\Source\ARM\startup_stm32f10x_hd.s
+      Include file:  RTE_Driver\Config\RTE_Device.h
 </pre>
 </body>
 </html>
