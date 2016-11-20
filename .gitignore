@@ -40,6 +40,8 @@
 *.crf
 *.htm
 *.axf
+*.map
+*.lst
 
 #UltraEdit
 *.bak
