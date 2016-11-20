@@ -26,3 +26,5 @@
 .\objects\inv_mpu_dmp_motion_driver.o: MPU6050\inv_mpu_dmp_motion_driver.h
 .\objects\inv_mpu_dmp_motion_driver.o: MPU6050\dmpKey.h
 .\objects\inv_mpu_dmp_motion_driver.o: MPU6050\dmpmap.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\WinterSky\UsartConfig.h
+.\objects\inv_mpu_dmp_motion_driver.o: .\YuukiDach\delay.h

@@ -1,5 +1,5 @@
 #include "WifiControl.h"
-#include "UsartConf.h"
+#include "UsartConfig.h"
 #include "delay.h"
 
 #include <stdio.h>

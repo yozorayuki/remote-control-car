@@ -369,7 +369,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\USER;..\MyLib\MPU6050;..\MyLib\SYSTEM\sys</IncludePath>
+              <IncludePath>.\MPU6050;.\SYSTEM\sys;.\WinterSky;.\YuukiDach</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -410,87 +410,57 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>USER</GroupName>
+          <GroupName>YuukiDach</GroupName>
           <Files>
-            <File>
-              <FileName>ADCConfig.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\ADCConfig.c</FilePath>
-            </File>
-            <File>
-              <FileName>AutoControl.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\AutoControl.c</FilePath>
-            </File>
             <File>
               <FileName>controller.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\controller.c</FilePath>
+              <FilePath>.\YuukiDach\controller.c</FilePath>
             </File>
             <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\delay.c</FilePath>
+              <FilePath>.\YuukiDach\delay.c</FilePath>
             </File>
             <File>
               <FileName>final_charge.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\final_charge.c</FilePath>
-            </File>
-            <File>
-              <FileName>LedConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\LedConf.c</FilePath>
+              <FilePath>.\YuukiDach\final_charge.c</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\main.c</FilePath>
+              <FilePath>.\YuukiDach\main.c</FilePath>
             </File>
             <File>
               <FileName>mechanical_arm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\mechanical_arm.c</FilePath>
+              <FilePath>.\YuukiDach\mechanical_arm.c</FilePath>
             </File>
             <File>
               <FileName>movement.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\movement.c</FilePath>
+              <FilePath>.\YuukiDach\movement.c</FilePath>
             </File>
             <File>
               <FileName>pca9685.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\pca9685.c</FilePath>
+              <FilePath>.\YuukiDach\pca9685.c</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\stm32f10x_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>SysConfig.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\SysConfig.c</FilePath>
+              <FilePath>.\YuukiDach\stm32f10x_it.c</FilePath>
             </File>
             <File>
               <FileName>TIM.C</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\TIM.C</FilePath>
+              <FilePath>.\YuukiDach\TIM.C</FilePath>
             </File>
             <File>
               <FileName>ultrasonic.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\USER\ultrasonic.c</FilePath>
-            </File>
-            <File>
-              <FileName>UsartConf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\UsartConf.c</FilePath>
-            </File>
-            <File>
-              <FileName>WifiControl.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\WifiControl.c</FilePath>
+              <FilePath>.\YuukiDach\ultrasonic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -500,22 +470,22 @@
             <File>
               <FileName>inv_mpu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MyLib\MPU6050\inv_mpu.c</FilePath>
+              <FilePath>.\MPU6050\inv_mpu.c</FilePath>
             </File>
             <File>
               <FileName>inv_mpu_dmp_motion_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MyLib\MPU6050\inv_mpu_dmp_motion_driver.c</FilePath>
+              <FilePath>.\MPU6050\inv_mpu_dmp_motion_driver.c</FilePath>
             </File>
             <File>
               <FileName>mpu6050.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MyLib\MPU6050\mpu6050.c</FilePath>
+              <FilePath>.\MPU6050\mpu6050.c</FilePath>
             </File>
             <File>
               <FileName>mpuiic.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MyLib\MPU6050\mpuiic.c</FilePath>
+              <FilePath>.\MPU6050\mpuiic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -525,7 +495,42 @@
             <File>
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MyLib\SYSTEM\sys\sys.c</FilePath>
+              <FilePath>.\SYSTEM\sys\sys.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>WinterSky</GroupName>
+          <Files>
+            <File>
+              <FileName>ADCConfig.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WinterSky\ADCConfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>AutoControl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WinterSky\AutoControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>LedConfig.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WinterSky\LedConfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>SysConfig.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WinterSky\SysConfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>UsartConfig.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WinterSky\UsartConfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>WifiControl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\WinterSky\WifiControl.c</FilePath>
             </File>
           </Files>
         </Group>

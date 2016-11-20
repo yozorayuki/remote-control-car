@@ -1,7 +1,7 @@
 #include "mpu6050.h"
 //#include "sys.h"
 #include "delay.h"
-#include "UsartConf.h"   
+#include "UsartConfig.h"   
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK战舰STM32开发板V3

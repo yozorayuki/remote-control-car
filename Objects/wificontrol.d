@@ -19,3 +19,6 @@
 .\objects\wificontrol.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_tim.h
 .\objects\wificontrol.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\wificontrol.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
+.\objects\wificontrol.o: WinterSky\UsartConfig.h
+.\objects\wificontrol.o: D:\Program Files\Keil uVision5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\wificontrol.o: .\YuukiDach\delay.h

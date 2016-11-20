@@ -17,7 +17,7 @@
 
 #include "movement.h"
 #include "controller.h"
-#include "usartconf.h"
+#include "usartconfig.h"
 #include "pca9685.h"
 #include "mechanical_arm.h"
 

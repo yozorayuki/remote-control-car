@@ -7,7 +7,7 @@
 .\objects\stm32f10x_rcc.o: D:\Program Files\Keil uVision5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h
 .\objects\stm32f10x_rcc.o: D:\Program Files\Keil uVision5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h
 .\objects\stm32f10x_rcc.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include\system_stm32f10x.h
-.\objects\stm32f10x_rcc.o: .\USER\stm32f10x_conf.h
+.\objects\stm32f10x_rcc.o: .\YuukiDach\stm32f10x_conf.h
 .\objects\stm32f10x_rcc.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_adc.h
 .\objects\stm32f10x_rcc.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include\stm32f10x.h
 .\objects\stm32f10x_rcc.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_dma.h

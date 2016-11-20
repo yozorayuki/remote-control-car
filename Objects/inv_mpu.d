@@ -28,3 +28,4 @@
 .\objects\inv_mpu.o: MPU6050\mpuiic.h
 .\objects\inv_mpu.o: .\SYSTEM\sys\sys.h
 .\objects\inv_mpu.o: .\YuukiDach\delay.h
+.\objects\inv_mpu.o: .\WinterSky\UsartConfig.h

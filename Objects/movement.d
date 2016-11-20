@@ -21,3 +21,7 @@
 .\objects\movement.o: D:\Program Files\Keil uVision5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\movement.o: YuukiDach\delay.h
 .\objects\movement.o: YuukiDach\controller.h
+.\objects\movement.o: .\WinterSky\usartconfig.h
+.\objects\movement.o: D:\Program Files\Keil uVision5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\movement.o: YuukiDach\pca9685.h
+.\objects\movement.o: YuukiDach\mechanical_arm.h
