@@ -33,6 +33,13 @@
 *.su
 
 #Keil
+*.o
+*.lnp
+*.dep
+*.d
+*.crf
+*.htm
+*.axf
 
-
-
+#UltraEdit
+*.bak
