@@ -135,7 +135,9 @@ unsigned short inv_orientation_matrix_to_scalar(const signed char *mtx);
 u8 run_self_test(void);
 u8 mpu_dmp_init(void);
 u8 mpu_dmp_get_data(float *pitch,float *roll,float *yaw);
+
 u8 getYaw(float *yaw);
+void resetOrientation(void);
 
 #endif  /* #ifndef _INV_MPU_H_ */
 

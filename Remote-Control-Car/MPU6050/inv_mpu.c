@@ -3032,6 +3032,10 @@ u8 mpu_dmp_get_data(float *pitch,float *roll,float *yaw)
 }
 
 
+void resetOrientation(void) {
+	dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation));//ÉèÖÃÍÓÂİÒÇ·½Ïò
+}
+
 u8 getYaw(float *yaw)
 {
 	float q0=1.0f,q1=0.0f,q2=0.0f,q3=0.0f;

@@ -53,9 +53,9 @@ uint32_t Ultrasonic_Trig ( uint32_t _line )
         retry ++ ;
     
     return u32_ultrasonic_count ;
-    /* 0 : Error 
+    /* 0 : Error
        1 : Dis > 200.com
-       default : Normal 
+       default : Normal
     */
 }
 

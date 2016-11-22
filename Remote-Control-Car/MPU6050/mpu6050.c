@@ -19,7 +19,7 @@
 //返回值:0,成功
 //    其他,错误代码
 u8 MPU_Init(void)
-{ 
+{
 	u8 res;
 	GPIO_InitTypeDef  GPIO_InitStructure;
 
@@ -39,7 +39,7 @@ u8 MPU_Init(void)
 	MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X80);	//复位MPU6050
 	delay_ms(100);
 	MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X00);	//唤醒MPU6050 
-	MPU_Set_Gyro_Fsr(2);					//陀螺仪传感器,±2000dps
+	MPU_Set_Gyro_Fsr(3);					//陀螺仪传感器,±2000dps
 	MPU_Set_Accel_Fsr(0);					//加速度传感器,±2g
 	MPU_Set_Rate(50);						//设置采样率50Hz
 	MPU_Write_Byte(MPU_INT_EN_REG,0X00);	//关闭所有中断

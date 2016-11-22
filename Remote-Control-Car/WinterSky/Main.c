@@ -15,7 +15,6 @@
   * <h2><center>&copy; COPYRIGHT 2016 Yuuki_Dach</center></h2>
   ******************************************************************************
   */
-
 #include "controller.h"
 #include "delay.h"
 #include "usartconfig.h"
@@ -48,16 +47,19 @@ int main(void) {
     USART1_Config();
     NVIC_Config();
     delay_ms(100);
-    WIFI_ConnectToServer();
+    //WIFI_ConnectToServer();
     delay_ms(100);
-    printf("\nis connected!\n");
+    printf("\nTCP Connected\n");
 	
     Ultrasonic_Init();
+	printf("Ultrasonic Init OK\n");
 	
 	MPU_Init();					//初始化MPU6050
-	while(mpu_dmp_init()){}
+	printf("MPU Init OK\n");
+	while(mpu_dmp_init());
+	printf("DMP Init OK\n");
 	
-    putArmHigh();
+    //putArmHigh();
 	
 	int str = 0;
 	
@@ -67,9 +69,10 @@ int main(void) {
             armControl(getButtonData());
             dir = getPart3Direction();
 			
-			if(getButtonData() == PSB_L1) {
+			if(getButtonData() == PSB_L2) {
 				ADC_PrintValue();
-				while(getButtonData() == PSB_L1);
+				printf("::%u\n", Ten_Times_Trig(GPIO_Pin_7));
+				while(getButtonData() == PSB_L2);
 			}
 			
 			str = 0;
@@ -77,13 +80,21 @@ int main(void) {
         } else if (isAutoControl()){
 			if(!str) {
 				str = 1;
-				printf(":MPU6050 INIT\n");
+				/*
+				PCA9685_SetOutput(PCA_ADDRESS, LEFT1_TIRE_ENA , 0, 0xfff*20/100);
+				PCA9685_SetOutput(PCA_ADDRESS, LEFT2_TIRE_ENA , 0, 0xfff*50/100);
+				PCA9685_SetOutput(PCA_ADDRESS, RIGHT2_TIRE_ENA, 0, 0xfff*0/100);
+				PCA9685_SetOutput(PCA_ADDRESS, RIGHT1_TIRE_ENA, 0, 0xfff*0/100);
 				
-				MPU_Init();					//初始化MPU6050
-				while(mpu_dmp_init()){}
+				//setForwards() ;
+				//setBackwards();
+				//setTurnLeft() ;
+				setTurnRight();
+				*/
+				
 			}
-			
-			AutoControl();
+			Tracking(0);
+			//AutoControl();
             //Final_Charge (PART3RIGHT); // dir == PART3LEFT(0) or PART3RIGHT(1)
         } 
     }

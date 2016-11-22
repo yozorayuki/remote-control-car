@@ -50,15 +50,18 @@ void Tire_Config(void){
 /**
  * @brief	Sets speed of motors
  * @param	towards: FORWARDS or BACKWARDS
- * @param	PWM_Set: The PWM of motors(from 0 to 100) [WARNING!!!Since we are using 2 different motors, the PWM must be no more than 65]
+ * @param	PWM_Set: The PWM of motors(from 0 to 100)
  * @retval	None
  */
-void setSpeed(int towards, int PWM_Setl, int PWM_Setr){	
+void setSpeed(int towards, int PWM_Setl, int PWM_Setr){
+    PWM_Setl = PWM_Setl < 100 ? PWM_Setl : 100;            
+    PWM_Setr = PWM_Setr < 100 ? PWM_Setr : 100;
+    
     if (PWM_Setl <= 100 && PWM_Setr <= 100){
         PCA9685_SetOutput(PCA_ADDRESS, LEFT1_TIRE_ENA , 0, 0xfff*PWM_Setl/100);
-        PCA9685_SetOutput(PCA_ADDRESS, LEFT2_TIRE_ENA , 0, 0xfff*PWM_Setl/100);  // Our motors may have sth. wrong, so I add 10% pwm on them.
+        PCA9685_SetOutput(PCA_ADDRESS, LEFT2_TIRE_ENA , 0, 0xfff*(PWM_Setl)/100);  
         PCA9685_SetOutput(PCA_ADDRESS, RIGHT1_TIRE_ENA, 0, 0xfff*PWM_Setr/100);
-        PCA9685_SetOutput(PCA_ADDRESS, RIGHT2_TIRE_ENA, 0, 0xfff*PWM_Setr/100);
+        PCA9685_SetOutput(PCA_ADDRESS, RIGHT2_TIRE_ENA, 0, 0xfff*(PWM_Setr)/100);
     }
     switch (towards) {
         case FORWARDS : setForwards() ; break;
@@ -112,13 +115,13 @@ void stopTheCar(void) {
 
 
 void carGo(uint8_t dir){
-    switch (dir) {      
+    switch (dir) {
         case PSB_PAD_UP   : setSpeed(FORWARDS , 25, 25); break;
         case PSB_PAD_DOWN : setSpeed(BACKWARDS, 25, 25); break;
-        case PSB_PAD_RIGHT: setSpeed(TURNRIGHT, 25, 25); break;
-        case PSB_PAD_LEFT : setSpeed(TURNLEFT , 25, 25); break;
-        case PSB_CIRCLE   : setSpeed(TURNRIGHT, 25,  8); break;
-        case PSB_SQUARE   : setSpeed(TURNLEFT ,  8, 25); break;
+        case PSB_PAD_RIGHT: setSpeed(TURNRIGHT, 60, 60); break;
+        case PSB_PAD_LEFT : setSpeed(TURNLEFT , 60, 60); break;
+        case PSB_CIRCLE   : setSpeed(TURNRIGHT, 25, 25); break;
+        case PSB_SQUARE   : setSpeed(TURNLEFT , 25, 25); break;
         default: stopTheCar();
     }
 }

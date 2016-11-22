@@ -3,6 +3,7 @@
 
 #include "stm32f10x.h"
 
+
 #define TRACK_RCC RCC_APB2Periph_GPIOA
 #define TRACK_GPIO GPIOD
 #define TRACK_FR GPIO_Pin_11
@@ -10,23 +11,27 @@
 #define TRACK_BL GPIO_Pin_13
 #define TRACK_FL GPIO_Pin_14
 
-#define ALL 2500
-#define SEEKED 3000
-#define FINDED 1500
 
-#define DS 5
-#define TS1 13
-#define TS2 17
+#define ONE 250
+#define ALL 1300
+#define DISTANCE 2000
+
+#define DS1 15
+#define DS2 22
+#define TS1 22
+#define TS2 60
 
 void AutoControlConfig(void);
-void ReStart(void);
 u8 TrackCheck(void);
-void Tracking(u8 _toward);
-void preDeal(void);
-void clearAdVal (void);
-void checkDir (uint8_t pos);
-void Finding(s8 _nToward, s8 _nTurn);
+void Tracking(u8 _nD);
+void PreDeal(void);
+void Finding(u8 _nD, u8 _nT);
 void Seeking(void);
+void TaskStart(u16 nms);
+u8 Tasking(void);
+void TaskClose(void);
+
+
 void AutoControl(void);
 
 
