@@ -441,6 +441,8 @@ void Finding(u8 _nD, u8 _nT) {
 	stopTheCar();
 	printf("light is finded\n");
 	bFind = 0;
+	
+	delay_ms(50);
 }
 
 
@@ -448,16 +450,13 @@ void Seeking(void) {
 	LightCheck();
 	
 	if(nToward == 2) {
-		printf(":NO LIGHT %4d, %4d, %4d, %4d, %4d - %4d, %4d, %4d, %4d\n", AD_Value[0], AD_Value[1], AD_Value[2], AD_Value[3], AD_Value[4], AD_Value[5], AD_Value[6], AD_Value[7], AD_Value[8]);
-		printf("          left    %4d, right   %4d\n", AD_Value[10], AD_Value[11]);
+		printf(":NO LIGHT\n");
+		ADC_PrintValue();
 		Tracking(0);
-		/*
-		if(AD_Value[9] > 1250) {
-			bSeek = 0;
-			stopTheCar();
-			printf("color limit\n");
-		}
-		*/
+		
+		u32 iDistance = Ten_Times_Trig(GPIO_Pin_7);
+		printf("::DISTANCE %u\n", iDistance);
+		
 		if(Ten_Times_Trig(GPIO_Pin_7) > 1 && Ten_Times_Trig(GPIO_Pin_7) < DISTANCE) {
 			LightCheck();
 			if(nToward == 2) {
@@ -466,6 +465,13 @@ void Seeking(void) {
 				printf("distance limit\n");
 			}
 		}
+		
+		if(AD_Value[9] > 1250 && iDistance > 1 && iDistance < 10000) {
+			bSeek = 0;
+			stopTheCar();
+			printf("color limit\n");
+		}
+		
 		return;
 	}
 	
@@ -489,18 +495,18 @@ void Seeking(void) {
 	
 	if(nToward == 0 && Ten_Times_Trig(GPIO_Pin_7) > 1 && Ten_Times_Trig(GPIO_Pin_7) < DISTANCE) {
 		printf("seek distance limit\n");
-		if(AD_Value[0] > ONE && AD_Value[0] > AD_Value[3]) {
+		if(AD_Value[0] > 1000 && AD_Value[0] > AD_Value[3]) {
 			bFind = 1;
 			nTurn = 1;
-		} else if(AD_Value[3] > ONE && AD_Value[3] > AD_Value[0]) {
+		} else if(AD_Value[3] > 1000 && AD_Value[3] > AD_Value[0]) {
 			bFind = 1;
 			nTurn = 0;
 		}
 	} else if(nToward == 1 && AD_Value[9] > 1250) {
-		if(AD_Value[4] > ONE && AD_Value[4] > AD_Value[7]) {
+		if(AD_Value[4] > 1000 && AD_Value[4] > AD_Value[7]) {
 			bFind = 1;
 			nTurn = 0;
-		} else if(AD_Value[7] > ONE && AD_Value[7] > AD_Value[4]) {
+		} else if(AD_Value[7] > 1000 && AD_Value[7] > AD_Value[4]) {
 			bFind = 1;
 			nTurn = 1;
 		}
