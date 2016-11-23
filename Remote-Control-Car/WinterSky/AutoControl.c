@@ -16,7 +16,6 @@ float yaw = 0, dYaw = 0, target;	//≈∑¿≠Ω«
 
 u8 bStrat = 0, bEnd = 0, bSeek = 0, bFind;
 u8 nToward = 2, nTurn = 2;
-u16 adValue[10];
 
 
 void AutoControlConfig(void) {
@@ -40,10 +39,9 @@ u8 TrackCheck(void) {
 	return re;
 }
 
-
 void LightCheck(void) {
 	int flag = 0;
-	for(int i = 0; i < 9; i++) {
+	for(int i = 0; i < 8; i++) {
 		if(AD_Value[i] > ONE) flag++;
 	}
 	if(!flag) {
@@ -52,24 +50,14 @@ void LightCheck(void) {
 		return;
 	}
 	
-	u16 front = AD_Value[0] + AD_Value[1] + AD_Value[3] + AD_Value[4];
-	u16 back = AD_Value[5] + AD_Value[6] + AD_Value[7] + AD_Value[8];
+	u16 front = AD_Value[0] + AD_Value[1] + AD_Value[2] + AD_Value[3];
+	u16 back = AD_Value[4] + AD_Value[5] + AD_Value[6] + AD_Value[7];
 	
 	if(front > back + 500) {
 		nToward = 0;
 	} else if(back > front + 1000) {
 		nToward = 1;
 	}
-	/*
-	u16 left = AD_Value[4] + AD_Value[3] + AD_Value[5] + AD_Value[6];
-	u16 right = AD_Value[0] + AD_Value[1] + AD_Value[7] + AD_Value[8];
-	
-	if(left > right + 200) {
-		nTurn = 0;
-	} else if(right > left + 200){
-		nTurn = 1;
-	}
-	*/
 }
 
 
@@ -106,7 +94,101 @@ void TaskClose(void) {
 	}
 }
 
+void Tracking(u8 _nD) {
+	if(_nD) {
+		switch(TrackCheck()) {
+			case 0:
+				setSpeed(1, DS2, DS2);
+				break;
+			
+			case 6:
+				stopTheCar();
+				while(getYaw(&dYaw));
+			case 4:
+				//setSpeed(1, 30, 30);
+				setSpeed(2, TS2, TS2);
+				break;
+			
+			case 9:
+				stopTheCar();
+				while(getYaw(&dYaw));
+			case 8:
+				//setSpeed(1, 30, 30);
+				setSpeed(3, TS2, TS2);
+				break;
+			
+			default:
+				setSpeed(1, DS2, DS2);
+				break;
+		}
+	} else {
+		switch(TrackCheck()) {
+			case 0:
+				setSpeed(0, DS2, DS2);
+				break;
+			
+			case 9:
+				stopTheCar();
+				while(getYaw(&dYaw));
+			case 1:
+				//setSpeed(1, 30, 30);
+				setSpeed(2, TS2, TS2);
+				break;
+			
+			case 6:
+				stopTheCar();
+				while(getYaw(&dYaw));
+			case 2:
+				//setSpeed(1, 30, 30);
+				setSpeed(3, TS2, TS2);
+				break;
+			
+			default:
+				setSpeed(0, DS2, DS2);
+				break;
+		}	
+	}
+}
 
+
+/*
+void Tracking(u8 _nD) {
+	while(getYaw(&yaw));
+	if(yaw > dYaw - 15 && yaw < dYaw + 15) {
+		switch(TrackCheck()) {
+			case 0:
+				setSpeed(_nD, DS2, DS2);
+				break;
+			
+			case 2:
+				setSpeed(2+_nD, TS1, TS2);
+				break;
+		
+			case 4:
+				setSpeed(3-_nD, TS2, TS1);
+				break;
+			
+			default:
+				setSpeed(_nD, DS1, DS1);
+				break;
+		}
+	} else if(yaw < dYaw - 15) {
+		setSpeed(2, TS2, TS2);
+		while(yaw < dYaw - 5) {
+			getYaw(&yaw);
+		}
+		stopTheCar();
+	} else if(yaw > dYaw + 15) {
+		setSpeed(3, TS2, TS2);
+		while(yaw > dYaw + 5) {
+			getYaw(&yaw);
+		}
+	}
+}
+*/
+
+
+/*
 void Tracking(u8 _nD) {
 	if(_nD) {
 		switch(TrackCheck()) {
@@ -278,11 +360,14 @@ void Tracking(u8 _nD) {
 }
 
 
-void PreDeal(void) {	
+*/
+void PreDeal(void) {
+	/*
 	MPU_Init();					//≥ı ºªØMPU6050
 	while(mpu_dmp_init());
 	printf("DMP ReInit OK\n");
-	
+	*/
+	while(getYaw(&dYaw));
 	setSpeed(0, DS2, DS2);
 	
 	TaskStart(1000);
@@ -293,6 +378,9 @@ void PreDeal(void) {
 	TaskClose();
 	
 	stopTheCar();
+	
+	delay_ms(200);
+	
 }
 
 
@@ -303,9 +391,11 @@ void Finding(u8 _nD, u8 _nT) {
 	delay_ms(50);
 	setSpeed(3-_nT, TS2, TS2);
 	
+	#define dReg 7
+	
 	switch(_nT) {
 		case 1:
-			target = dYaw + 90 - 5;
+			target = dYaw + 90 - dReg;
 			while(getYaw(&yaw));
 			while(yaw < target) {
 				getYaw(&yaw);
@@ -313,7 +403,7 @@ void Finding(u8 _nD, u8 _nT) {
 			break;
 			
 		case 0:
-			target = dYaw - 90 + 5;
+			target = dYaw - 90 + dReg;
 			while(getYaw(&yaw));
 			while(yaw > target) {
 				getYaw(&yaw);
@@ -322,20 +412,17 @@ void Finding(u8 _nD, u8 _nT) {
 	}
 	
 	setSpeed(1, DS1, DS1);
-	delay_ms(1100);
+	delay_ms(900);
 	
 	setSpeed(0, DS1, DS1);
-	delay_ms(200);
-	while(!TrackCheck());
-	delay_ms(140);
+	delay_ms(150);
+	while(AD_Value[8] < 250);
 	
-	stopTheCar();
-	delay_ms(50);
 	setSpeed(2+_nT, TS2, TS2);
 	
 	switch(_nT) {
 		case 1:
-			target = dYaw + 5;
+			target = dYaw + dReg;
 			while(getYaw(&yaw));
 			while(yaw > target) {
 				getYaw(&yaw);
@@ -343,7 +430,7 @@ void Finding(u8 _nD, u8 _nT) {
 			break;
 		
 		case 0:
-			target = dYaw - 5;
+			target = dYaw - dReg;
 			while(getYaw(&yaw));
 			while(yaw < target) {
 				getYaw(&yaw);
@@ -364,11 +451,13 @@ void Seeking(void) {
 		printf(":NO LIGHT %4d, %4d, %4d, %4d, %4d - %4d, %4d, %4d, %4d\n", AD_Value[0], AD_Value[1], AD_Value[2], AD_Value[3], AD_Value[4], AD_Value[5], AD_Value[6], AD_Value[7], AD_Value[8]);
 		printf("          left    %4d, right   %4d\n", AD_Value[10], AD_Value[11]);
 		Tracking(0);
-		if(AD_Value[9] > 2800) {
+		/*
+		if(AD_Value[9] > 1250) {
 			bSeek = 0;
 			stopTheCar();
 			printf("color limit\n");
 		}
+		*/
 		if(Ten_Times_Trig(GPIO_Pin_7) > 1 && Ten_Times_Trig(GPIO_Pin_7) < DISTANCE) {
 			LightCheck();
 			if(nToward == 2) {
@@ -377,7 +466,6 @@ void Seeking(void) {
 				printf("distance limit\n");
 			}
 		}
-		
 		return;
 	}
 	
@@ -388,26 +476,35 @@ void Seeking(void) {
 	
 	Tracking(nToward);
 	
-	printf("%4d, %4d, %4d, %4d, %4d - %4d, %4d, %4d, %4d\n", AD_Value[0], AD_Value[1], AD_Value[2], AD_Value[3], AD_Value[4], AD_Value[5], AD_Value[6], AD_Value[7], AD_Value[8]);
+	printf("%4d, %4d, %4d, %4d - %4d, %4d, %4d, %4d\n", AD_Value[0], AD_Value[1], AD_Value[2], AD_Value[3], AD_Value[4], AD_Value[5], AD_Value[6], AD_Value[7]);
 	printf("       left    %4d, right   %4d\n", AD_Value[10], AD_Value[11]);
 	
-	if(AD_Value[10] < 2300) {
+	if(AD_Value[10] < 1600) {
 		bFind = 1;
 		nTurn = 0;
-	} else if(AD_Value[11] < 2300) {
+	} else if(AD_Value[11] < 1600) {
 		bFind = 1;
 		nTurn = 1;
 	}
 	
 	if(nToward == 0 && Ten_Times_Trig(GPIO_Pin_7) > 1 && Ten_Times_Trig(GPIO_Pin_7) < DISTANCE) {
 		printf("seek distance limit\n");
-		if(AD_Value[0] > ONE && AD_Value[0] > AD_Value[4]) {
+		if(AD_Value[0] > ONE && AD_Value[0] > AD_Value[3]) {
 			bFind = 1;
 			nTurn = 1;
-		} else if(AD_Value[4] > ONE && AD_Value[4] > AD_Value[0]) {
+		} else if(AD_Value[3] > ONE && AD_Value[3] > AD_Value[0]) {
 			bFind = 1;
 			nTurn = 0;
 		}
+	} else if(nToward == 1 && AD_Value[9] > 1250) {
+		if(AD_Value[4] > ONE && AD_Value[4] > AD_Value[7]) {
+			bFind = 1;
+			nTurn = 0;
+		} else if(AD_Value[7] > ONE && AD_Value[7] > AD_Value[4]) {
+			bFind = 1;
+			nTurn = 1;
+		}
+		
 	}
 	
 	if(bFind)

@@ -11,15 +11,22 @@
 #define TRACK_BL GPIO_Pin_13
 #define TRACK_FL GPIO_Pin_14
 
+#define TRACK_L1 GPIO_Pin_14
+#define TRACK_L2 GPIO_Pin_13
+#define TRACK_L3 GPIO_Pin_12
+#define TRACK_L4 GPIO_Pin_11
+
 
 #define ONE 250
-#define ALL 1300
 #define DISTANCE 2000
 
 #define DS1 15
-#define DS2 22
+#define DS2 20
 #define TS1 22
-#define TS2 60
+#define TS2 80
+
+
+extern float yaw, dYaw, target;
 
 void AutoControlConfig(void);
 u8 TrackCheck(void);

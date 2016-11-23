@@ -47,7 +47,7 @@ int main(void) {
     USART1_Config();
     NVIC_Config();
     delay_ms(100);
-    //WIFI_ConnectToServer();
+    WIFI_ConnectToServer();
     delay_ms(100);
     printf("\nTCP Connected\n");
 	
@@ -59,7 +59,7 @@ int main(void) {
 	while(mpu_dmp_init());
 	printf("DMP Init OK\n");
 	
-    //putArmHigh();
+    putArmHigh();
 	
 	int str = 0;
 	
@@ -81,20 +81,38 @@ int main(void) {
 			if(!str) {
 				str = 1;
 				/*
-				PCA9685_SetOutput(PCA_ADDRESS, LEFT1_TIRE_ENA , 0, 0xfff*20/100);
-				PCA9685_SetOutput(PCA_ADDRESS, LEFT2_TIRE_ENA , 0, 0xfff*50/100);
-				PCA9685_SetOutput(PCA_ADDRESS, RIGHT2_TIRE_ENA, 0, 0xfff*0/100);
-				PCA9685_SetOutput(PCA_ADDRESS, RIGHT1_TIRE_ENA, 0, 0xfff*0/100);
+				int _nT = 0;
 				
-				//setForwards() ;
-				//setBackwards();
-				//setTurnLeft() ;
-				setTurnRight();
+				setSpeed(0, DS1, DS1);
+				delay_ms(150);
+				while(AD_Value[8] < 250);
+				//while(!(TrackCheck()&3));
+				
+				setSpeed(2+_nT, TS2, TS2);
+				
+				switch(_nT) {
+					case 1:
+						target = dYaw + 5;
+						while(getYaw(&yaw));
+						while(yaw > target) {
+							getYaw(&yaw);
+						}
+						break;
+					
+					case 0:
+						target = dYaw - 5;
+						while(getYaw(&yaw));
+						while(yaw < target) {
+							getYaw(&yaw);
+						}
+						break;
+				}
+				
+				stopTheCar();
 				*/
-				
 			}
-			Tracking(0);
-			//AutoControl();
+			
+			AutoControl();
             //Final_Charge (PART3RIGHT); // dir == PART3LEFT(0) or PART3RIGHT(1)
         } 
     }
