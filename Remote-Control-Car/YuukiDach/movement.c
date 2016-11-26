@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @author  			 Yuuki_Dach
-  * @version 			 V1.2.0
+  * @author        Yuuki_Dach
+  * @version       V1.2.0
   * @date          3-November-2016
   * @description   Functions of our car's tires(motors).
   ******************************************************************************
   * @attention
   *
   * OUR CAR USES TIM3 TO OUTPUT PWM WAVE. AND THERE ARE ONLY TWO MOTORS IN OUR
-	* CAR. THE CONTROLLERI IS PS2. INTHIS PROGRAM, WE USE IT'S BUTTONS TO CONTROLL
+  * CAR. THE CONTROLLERI IS PS2. INTHIS PROGRAM, WE USE IT'S BUTTONS TO CONTROLL
   * ITS DIRECTIONS.
   *
   * <h2><center>&copy; COPYRIGHT 2016 Yuuki_Dach</center></h2>
@@ -115,13 +115,13 @@ void stopTheCar(void) {
 
 
 void carGo(uint8_t dir){
-    switch (dir) {
-        case PSB_PAD_UP   : setSpeed(FORWARDS , 25, 25); break;
-        case PSB_PAD_DOWN : setSpeed(BACKWARDS, 25, 25); break;
-        case PSB_PAD_RIGHT: setSpeed(TURNRIGHT, 60, 60); break;
-        case PSB_PAD_LEFT : setSpeed(TURNLEFT , 60, 60); break;
-        case PSB_CIRCLE   : setSpeed(TURNRIGHT, 25, 25); break;
-        case PSB_SQUARE   : setSpeed(TURNLEFT , 25, 25); break;
+    switch (dir) {      
+        case PSB_PAD_UP   : setSpeed(FORWARDS , 30, 30); break;
+        case PSB_PAD_DOWN : setSpeed(BACKWARDS, 30, 30); break;
+        case PSB_PAD_RIGHT: setSpeed(TURNRIGHT, 80, 80); break;
+        case PSB_PAD_LEFT : setSpeed(TURNLEFT , 80, 80); break;
+        case PSB_CIRCLE   : setSpeed(TURNRIGHT, 40, 40); break;
+        case PSB_SQUARE   : setSpeed(TURNLEFT , 40, 40); break;
         default: stopTheCar();
     }
 }

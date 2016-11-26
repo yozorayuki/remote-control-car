@@ -8,28 +8,29 @@
   * @attention
   *
   * THIS IS THE MAIN.C FILE IN THIS PROJECTS. IT CONTIANS MAIN FUNCTION. OUR CAR
-	* NEED TO BE CONTROLLED BY OURSELVES AT FIRST. AFTER WE COMPLETE THE TASK
-	* WE NEED TO DO. IT WILL BE AUTO-CONTROLLED AND DO THE REST WORK. FOR MORE
-	* SPECIFIC DESCRIPTIONS OF THE TASKS, YOU CAN FIND THEM IN "大赛章程.pdf".
+  * NEED TO BE CONTROLLED BY OURSELVES AT FIRST. AFTER WE COMPLETE THE TASK
+  * WE NEED TO DO. IT WILL BE AUTO-CONTROLLED AND DO THE REST WORK.
   *
   * <h2><center>&copy; COPYRIGHT 2016 Yuuki_Dach</center></h2>
   ******************************************************************************
   */
 
+#include "precompile.h"             // Enter this file to turn on or turn off the __DEBUG__ switch.
 #include "controller.h"
 #include "delay.h"
-#include "usartconf.h"
+#include "usartconfig.h"
 #include "movement.h"
 #include "mechanical_arm.h"
 #include "SysConfig.h"
 #include "WIFIControl.h"
 #include "ADCConfig.h"
 #include "mpu6050.h"
-//#include "AutoControl.h"
-#include "precompile.h"
+#include "mpuiic.h"
+#include "inv_mpu.h"
+#include "inv_mpu_dmp_motion_driver.h"
+#include "autocontrol.h"
 
-uint8_t dir = PART3LEFT;
-float lastYaw, yaw;
+uint8_t dir_in3 = PART3LEFT;
 
 int main(void) {
     delay_init(72);
@@ -37,8 +38,10 @@ int main(void) {
     Controller_Config();
     Tire_Config();
     Arm_Config();
+    Ultrasonic_Init();
     ADC_Config();
     MPU_Init();
+    while(mpu_dmp_init());
 
 #if (__DEBUG__ == __ON__)
     USART1_Config();
@@ -46,34 +49,35 @@ int main(void) {
     delay_ms(100);
     WIFI_ConnectToServer();
     delay_ms(100);
-    printf("\nis connected!\n");
+    printf("\nThe car is connected!\n");
 #endif
-
-    Ultrasonic_Init();
 
     putArmHigh();
 
     while(1){
         if (!isAutoControl()) {
-            carGo (getButtonData ());
+            carGo(getButtonData());
           
 #if (__DEBUG__ == __ON__)          
-            uint8_t mode = getButtonData () ;
-            printf("sonic: %5d\n", Ultrasonic_Trig(GPIO_Pin_7));
-            delay_ms(100);
-            if ( mode == PSB_START )
-                printf ( "7 : %u\r\n" , Ultrasonic_Trig ( GPIO_Pin_7 ) ) ;
-            else if ( mode == PSB_L2 )
-                printf ( "8 : %u\r\n" , Ultrasonic_Trig ( GPIO_Pin_8 ) ) ;
-            else if ( mode == PSB_R2 )
-                printf ( "9 : %u\r\n" , Ultrasonic_Trig ( GPIO_Pin_9 ) ) ;
+            //uint8_t mode = getButtonData();
+            //if (mode == PSB_START)
+            //    printf("7 : %u\r\n", Ultrasonic_Trig(GPIO_Pin_7));
+            //printf("dir is: %5d \n", dir_in3);
+            
+            if(getButtonData() == PSB_L2) {
+				ADC_PrintValue();
+				printf("::%u\n", Ten_Times_Trig(GPIO_Pin_7));
+				while(getButtonData() == PSB_L2);
+			}
 #endif
   
-            //armControl(getButtonData());  
-            dir = getPart3Direction();
+            armControl(getButtonData());  
+            dir_in3 = getPart3Direction();
+            
             
         } else if (isAutoControl()) {
-            Final_Charge (dir); // dir == PART3LEFT(0) or PART3RIGHT(1)
+            float part2yaw = AutoControl();
+            finishPart3(dir_in3, part2yaw);                // dir == PART3LEFT(0) or PART3RIGHT(1)
         } 
     }
 }

@@ -31,7 +31,7 @@ void Arm_Config(void) {
 
 
 void putArmHigh(void) {
-    PCA9685_SetOutput(PCA_ADDRESS, 0, 0, 115); 
+    PCA9685_SetOutput(PCA_ADDRESS, 0, 0, 130); 
     delay_ms(1000);
     PCA9685_SetOutput(PCA_ADDRESS, 1, 0, 470); 
     PCA9685_SetOutput(PCA_ADDRESS, 2, 0, 505); 

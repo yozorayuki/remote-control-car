@@ -14,7 +14,7 @@
 
 float yaw = 0, dYaw = 0, target;	//Å·À­½Ç
 
-u8 bStrat = 0, bEnd = 0, bSeek = 0, bFind;
+u8 bStrat = 0, bSeek = 0, bFind;
 u8 nToward = 2, nTurn = 2;
 
 
@@ -53,10 +53,18 @@ void LightCheck(void) {
 	u16 front = AD_Value[0] + AD_Value[1] + AD_Value[2] + AD_Value[3];
 	u16 back = AD_Value[4] + AD_Value[5] + AD_Value[6] + AD_Value[7];
 	
-	if(front > back + 500) {
-		nToward = 0;
-	} else if(back > front + 1000) {
-		nToward = 1;
+	if(AD_Value[0] + AD_Value[3] + AD_Value[4] + AD_Value[7] > 1000) {
+		if(front > back + 500) {
+			nToward = 0;
+		} else if(back > front + 1000) {
+			nToward = 1;
+		}
+	} else {
+		if(front > back) {
+			nToward = 0;
+		} else if(back > front) {
+			nToward = 1;
+		}
 	}
 }
 
@@ -105,7 +113,6 @@ void Tracking(u8 _nD) {
 				stopTheCar();
 				while(getYaw(&dYaw));
 			case 4:
-				//setSpeed(1, 30, 30);
 				setSpeed(2, TS2, TS2);
 				break;
 			
@@ -113,7 +120,6 @@ void Tracking(u8 _nD) {
 				stopTheCar();
 				while(getYaw(&dYaw));
 			case 8:
-				//setSpeed(1, 30, 30);
 				setSpeed(3, TS2, TS2);
 				break;
 			
@@ -131,7 +137,6 @@ void Tracking(u8 _nD) {
 				stopTheCar();
 				while(getYaw(&dYaw));
 			case 1:
-				//setSpeed(1, 30, 30);
 				setSpeed(2, TS2, TS2);
 				break;
 			
@@ -139,7 +144,6 @@ void Tracking(u8 _nD) {
 				stopTheCar();
 				while(getYaw(&dYaw));
 			case 2:
-				//setSpeed(1, 30, 30);
 				setSpeed(3, TS2, TS2);
 				break;
 			
@@ -151,222 +155,8 @@ void Tracking(u8 _nD) {
 }
 
 
-/*
-void Tracking(u8 _nD) {
-	while(getYaw(&yaw));
-	if(yaw > dYaw - 15 && yaw < dYaw + 15) {
-		switch(TrackCheck()) {
-			case 0:
-				setSpeed(_nD, DS2, DS2);
-				break;
-			
-			case 2:
-				setSpeed(2+_nD, TS1, TS2);
-				break;
-		
-			case 4:
-				setSpeed(3-_nD, TS2, TS1);
-				break;
-			
-			default:
-				setSpeed(_nD, DS1, DS1);
-				break;
-		}
-	} else if(yaw < dYaw - 15) {
-		setSpeed(2, TS2, TS2);
-		while(yaw < dYaw - 5) {
-			getYaw(&yaw);
-		}
-		stopTheCar();
-	} else if(yaw > dYaw + 15) {
-		setSpeed(3, TS2, TS2);
-		while(yaw > dYaw + 5) {
-			getYaw(&yaw);
-		}
-	}
-}
-*/
-
-
-/*
-void Tracking(u8 _nD) {
-	if(_nD) {
-		switch(TrackCheck()) {
-			case 0:								// backward
-				setSpeed(1, DS2, DS2);
-				break;
-			
-			case 4:
-				setSpeed(2, TS1, TS2);
-				break;
-			
-			case 8:
-				setSpeed( 3, TS2, TS1);
-				break;
-			
-			case 1:
-				stopTheCar();
-				while(getYaw(&yaw));
-				if(yaw > dYaw + 15) {
-					target = dYaw + 5;
-					setSpeed(3, TS1, TS2);
-					while(yaw > target) {
-						getYaw(&yaw);
-					}
-				} else 
-					setSpeed(2, TS2, TS1);
-				break;
-			
-			case 2:
-				stopTheCar();
-				while(getYaw(&yaw));
-				if(yaw < dYaw - 15) {
-					target = dYaw - 5;
-					setSpeed(2, TS2, TS1);
-					while(yaw < target) {
-						getYaw(&yaw);
-					}
-				}
-				setSpeed(3, TS1, TS2);
-				break;
-			
-			case 5:
-				setSpeed(2, TS2, TS2);
-				break;
-			
-			case 10:
-				setSpeed(3, TS2, TS2);
-				break;
-			
-			case 9:
-				stopTheCar();
-				while(getYaw(&dYaw));
-				setSpeed(2, TS1, TS2);
-				while((TrackCheck()&2) == 0);
-				stopTheCar();
-				break;
-			
-			case 6:
-				stopTheCar();
-				while(getYaw(&dYaw));
-				setSpeed(3, TS2, TS1);
-				while((TrackCheck()&1) == 0);
-				stopTheCar();
-				break;
-			
-			case 3:					// 90 degree
-			case 12:				// 90 degree	
-			case 7:					// 1 2 
-									//   4
-			
-			case 11:				// 1 2
-									// 8
-			
-			case 13:				// 1 
-									// 8 4
-			
-			case 14:				//   2
-									// 8 4
-			
-			case 15:				// all
-				stopTheCar();
-				printf(":Puse\n");
-				break;
-			
-			default:
-				stopTheCar();
-				break;
-		}
-	} else {
-		switch(TrackCheck()) {
-			case 0:
-				setSpeed(0, DS2, DS2);
-				break;
-			
-			case 1:
-				setSpeed(2, TS1, TS2);
-				break;
-			
-			case 2:
-				setSpeed( 3, TS2, TS1);
-				break;
-			
-			case 4:
-				stopTheCar();
-				while(getYaw(&yaw));
-				if(yaw > dYaw + 15) {
-					target = dYaw + 5;
-					setSpeed(3, TS1, TS2);
-					while(yaw > target) {
-						getYaw(&yaw);
-					}
-				} else 
-					setSpeed(2, TS2, TS1);
-				break;
-			
-			case 8:
-				stopTheCar();
-				while(getYaw(&yaw));
-				if(yaw < dYaw - 15) {
-					target = dYaw - 5;
-					setSpeed(2, TS2, TS1);
-					while(yaw < target) {
-						getYaw(&yaw);
-					}
-				} else 
-					setSpeed(3, TS1, TS2);
-				break;
-				
-			case 5:
-				setSpeed(2, TS2, TS2);
-				break;
-				
-			case 10:
-				setSpeed(3, TS2, TS2);
-				break;
-			
-			case 9:
-				stopTheCar();
-				while(getYaw(&dYaw));
-				setSpeed(2, TS1, TS2);
-				while((TrackCheck()&2) == 0);
-				stopTheCar();
-				break;
-			
-			case 6:
-				stopTheCar();
-				while(getYaw(&dYaw));
-				setSpeed(3, TS2, TS1);
-				while((TrackCheck()&1) == 0);
-				stopTheCar();
-				break;
-			
-			case 3:
-			case 12:
-			case 7:
-			case 11:
-			case 13:
-			case 14:
-			case 15:
-				stopTheCar();
-				printf(":Puse\n");
-				break;
-			
-			default:
-				stopTheCar();
-				break;
-		}
-	}
-}
-
-
-*/
 void PreDeal(void) {
-	/*
-	MPU_Init();					//³õÊ¼»¯MPU6050
-	while(mpu_dmp_init());
-	printf("DMP ReInit OK\n");
-	*/
+	stopTheCar();
 	while(getYaw(&dYaw));
 	setSpeed(0, DS2, DS2);
 	
@@ -378,9 +168,7 @@ void PreDeal(void) {
 	TaskClose();
 	
 	stopTheCar();
-	
 	delay_ms(200);
-	
 }
 
 
@@ -391,11 +179,11 @@ void Finding(u8 _nD, u8 _nT) {
 	delay_ms(50);
 	setSpeed(3-_nT, TS2, TS2);
 	
-	#define dReg 7
+	#define dAngle 7
 	
 	switch(_nT) {
 		case 1:
-			target = dYaw + 90 - dReg;
+			target = dYaw + 90 - dAngle;
 			while(getYaw(&yaw));
 			while(yaw < target) {
 				getYaw(&yaw);
@@ -403,7 +191,7 @@ void Finding(u8 _nD, u8 _nT) {
 			break;
 			
 		case 0:
-			target = dYaw - 90 + dReg;
+			target = dYaw - 90 + dAngle;
 			while(getYaw(&yaw));
 			while(yaw > target) {
 				getYaw(&yaw);
@@ -422,7 +210,7 @@ void Finding(u8 _nD, u8 _nT) {
 	
 	switch(_nT) {
 		case 1:
-			target = dYaw + dReg;
+			target = dYaw + dAngle;
 			while(getYaw(&yaw));
 			while(yaw > target) {
 				getYaw(&yaw);
@@ -430,7 +218,7 @@ void Finding(u8 _nD, u8 _nT) {
 			break;
 		
 		case 0:
-			target = dYaw - dReg;
+			target = dYaw - dAngle;
 			while(getYaw(&yaw));
 			while(yaw < target) {
 				getYaw(&yaw);
@@ -510,7 +298,6 @@ void Seeking(void) {
 			bFind = 1;
 			nTurn = 1;
 		}
-		
 	}
 	
 	if(bFind)
@@ -518,16 +305,14 @@ void Seeking(void) {
 }
 
 
-void AutoControl(void) {
+float AutoControl(void) {
 	if(!bStrat) {
 		PreDeal();
 		bStrat = 1;
 		bSeek = 1;
 	}
-	if(bSeek) {
+	while(bSeek) {
 		Seeking();
-	} else if(!bEnd) {
-		printf("do something and end\n");
-		bEnd = 1;
 	}
+	return dYaw;
 }

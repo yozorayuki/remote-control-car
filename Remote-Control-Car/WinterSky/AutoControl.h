@@ -34,12 +34,12 @@ void Tracking(u8 _nD);
 void PreDeal(void);
 void Finding(u8 _nD, u8 _nT);
 void Seeking(void);
+
 void TaskStart(u16 nms);
 u8 Tasking(void);
 void TaskClose(void);
 
-
-void AutoControl(void);
+float AutoControl(void);
 
 
 #endif

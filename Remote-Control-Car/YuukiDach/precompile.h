@@ -13,7 +13,6 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MPU6050
 
 #include "string.h"
 #include "stdio.h"

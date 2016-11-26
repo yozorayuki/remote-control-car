@@ -8,19 +8,21 @@ void Ultrasonic_Init ( void )
     
     RCC_APB2PeriphClockCmd ( RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO , ENABLE ) ;
     
+    /*
     gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 ;
     gpio_init_structure.GPIO_Mode = GPIO_Mode_IPD ;
     gpio_init_structure.GPIO_Speed = GPIO_Speed_50MHz ;
     GPIO_Init ( GPIOB , &gpio_init_structure ) ;
     GPIO_ResetBits ( GPIOB , GPIO_Pin_0 ) ;
     GPIO_ResetBits ( GPIOB , GPIO_Pin_1 ) ;
+    */
     
     gpio_init_structure.GPIO_Pin = GPIO_Pin_7 ;
     gpio_init_structure.GPIO_Mode = GPIO_Mode_IPD ;
     gpio_init_structure.GPIO_Speed = GPIO_Speed_50MHz ;
-    GPIO_Init ( GPIOA , &gpio_init_structure ) ;
+    GPIO_Init (GPIOA , &gpio_init_structure ) ;
     
-    GPIO_ResetBits ( GPIOA , GPIO_Pin_7 ) ;
+    GPIO_ResetBits (GPIOA, GPIO_Pin_7) ;
     
     gpio_init_structure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 ;
     gpio_init_structure.GPIO_Mode = GPIO_Mode_Out_PP ;
@@ -53,9 +55,9 @@ uint32_t Ultrasonic_Trig ( uint32_t _line )
         retry ++ ;
     
     return u32_ultrasonic_count ;
-    /* 0 : Error
+    /* 0 : Error 
        1 : Dis > 200.com
-       default : Normal
+       default : Normal 
     */
 }
 

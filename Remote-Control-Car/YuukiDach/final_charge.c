@@ -1,196 +1,144 @@
+/**
+  ******************************************************************************
+  * @author        Yuuki_Dach
+  * @version       V1.0.0
+  * @date          23-November-2016
+  * @description   Functions to finish part3
+  ******************************************************************************
+  * @attention
+  *
+  * THIS IS THE FINAL PART OF OUR COMPETITION. ALL WE NEED TO DO IS GOING UP A 
+  * SLOPE WHICH HAS A INCLINATION OF 30 DEGREE.
+  *
+  * <h2><center>&copy; COPYRIGHT 2016 Yuuki_Dach</center></h2>
+  ******************************************************************************
+  */
+
 #include "final_charge.h"
 
-uint32_t last_time, now ;
-uint32_t inner_trigger, middle_trigger = GPIO_Pin_7, outer_trigger;
+#include "mechanical_arm.h"
+#include "mpu6050.h"
+#include "mpuiic.h"
+#include "inv_mpu.h"
+#include "inv_mpu_dmp_motion_driver.h"
 
-/** @breif Define innner and outer pins
-  * @param dir: Direction at part 3.
-  * @retval None
-  */
-void pinsDef(uint8_t dir) {
-    if (dir) {         // Turn right at part 3
-        inner_trigger = GPIO_Pin_8 ;
-        outer_trigger = GPIO_Pin_9 ;
-    } else {                   // Turn left at part 3
-        inner_trigger = GPIO_Pin_9 ; 
-        outer_trigger = GPIO_Pin_8 ;
+uint32_t last_sonic, now_sonic;
+float last_yaw, now_yaw;
+uint8_t inner_turn, outer_turn;
+
+void dirDef(uint8_t dir) {
+    if (dir) {
+        inner_turn = TURNLEFT;
+        outer_turn = TURNRIGHT;
+    } else {
+        inner_turn = TURNRIGHT;
+        outer_turn = TURNLEFT;
     }
 }
 
-
-/** @breif Turn a bit to make sure the car is facing to the slope.
-  * @param dir: Direction at part 3.
-  * @retval None
-  */
-void correctDir(uint8_t dir) {
-    uint32_t tryLeft = 0;
-    
-    last_time = Ten_Times_Trig (middle_trigger);
-    
-    if (dir) 
-        setSpeed (TURNRIGHT, TURN_PWM, TURN_PWM);                             // Deside whether to turn left or turn right.
-    else 
-        setSpeed (TURNLEFT , TURN_PWM, TURN_PWM);
-    delay_ms (INTERVAL << 1);
-    tryLeft = Ten_Times_Trig(middle_trigger);               // Insure the data is right.
-    tryLeft = Ten_Times_Trig(middle_trigger);
-    tryLeft = Ten_Times_Trig(middle_trigger);
-    if (tryLeft < last_time) dir = 1;
-    else dir = 0;
-    
-    do {
-        if (dir) 
-            setSpeed (TURNRIGHT, TURN_PWM, TURN_PWM);
-        else
-            setSpeed (TURNLEFT, TURN_PWM, TURN_PWM);
-        delay_ms ( INTERVAL ) ;
-        stopTheCar();
-        now = Ten_Times_Trig (inner_trigger) ;
-        
-#if (__DEBUG__ == __ON__)
-        printf ( "Correct Direction : now = %u\r\n" , now ) ;
-        printf ( "Correct Direction : late_time = %u\r\n" , now ) ;
-#endif
-        
-        if (last_time < now + 2000) last_time = now;
-    } while ( last_time == now) ;
-}
-
-
-void turnInner(uint8_t dir) {
-    do {
-        if (dir)
-            setSpeed (TURNLEFT , 20, 20);
-        else
-            setSpeed (TURNRIGHT, 20, 20);
-        delay_ms(INNER_TIME);
-        now = Ten_Times_Trig (middle_trigger) ;
-
-#if (__DEBUG__ == __ON__)
-        printf ( "Turn inner : now = %u\r\n" , now ) ;
-#endif 
-        
-    } while (now < INNER_DIS) ;                         // Make sure the car has turned over the slope.
-    if (dir)
-            setSpeed (TURNLEFT, 20, 20);
-        else
-            setSpeed (TURNRIGHT , 20, 20);
-        delay_ms(INNER_TIME);
-}
-
-
-void forwardToSlope(uint8_t dir) {
-    setSpeed (FORWARDS, 15, 15);
-    delay_ms (FORWARD_I_TIME);
-    if (dir)
-            setSpeed (TURNRIGHT, 20, 20);
-        else
-            setSpeed (TURNLEFT , 20, 20);
-        delay_ms((INNER_TIME << 1) + 10);
-    do {
-        setSpeed (FORWARDS, 10, 10);
-        delay_ms ( INTERVAL ) ;
-        stopTheCar();
-        now = Ten_Times_Trig (middle_trigger);
-    
-#if (__DEBUG__ == __ON__)
-        printf ( "Forward I : now = %u\r\n" , now ) ;
-#endif 
-        
-    } while (now > FORWARD_I_DIS);
-}
-
-
-void turnOuter(uint8_t dir) {
-    if (dir)
-        setSpeed (TURNRIGHT, TURN_PWM, TURN_PWM) ;
-    else
-        setSpeed (TURNLEFT , TURN_PWM, TURN_PWM) ;
-    delay_ms (OUTER_TIME_I);
-    last_time = Ten_Times_Trig (inner_trigger) ;
-    do {
-        if (dir)
-            setSpeed (TURNRIGHT, TURN_PWM, TURN_PWM);
-        else
-            setSpeed (TURNLEFT , TURN_PWM, TURN_PWM);
-        delay_ms ( INTERVAL ) ;
-        now = Ten_Times_Trig (inner_trigger);
-    
-#if (__DEBUG__ == __ON__)
-        printf ( "Turn Outer : now = %u\r\n" , now );
-        printf ("Turn Outer : last_time = %u\r\n", last_time);
-#endif
-        
-        if (last_time > now + 800 || last_time < now + 800) last_time = now;
-        if (now > 65530) break;
-    } while ( last_time == now ) ;
-    if (dir)
-        setSpeed (TURNRIGHT, TURN_PWM, TURN_PWM) ;
-    else
-        setSpeed (TURNLEFT , TURN_PWM, TURN_PWM) ;
-    delay_ms (INTERVAL+10);
-}
-
-
-void upwardSlope(uint8_t dir) {             
-    if (dir)                                           // Adjust the direction
-        setSpeed (TURNLEFT, TURN_PWM, TURN_PWM);
-    else
-        setSpeed (TURNRIGHT, TURN_PWM, TURN_PWM);
-    delay_ms (INTERVAL + 30);
-    
-    setSpeed(FORWARDS, 40, 40);
-    delay_ms(FORWARD_II_TIME) ;
-    setSpeed(FORWARDS, 10, 10);
-    delay_ms(300);
+void correctDir(float part2yaw) {
+    if (part2yaw > 0) {
+        setSpeed(TURNRIGHT, TURN_PWM, TURN_PWM);
+        while (part2yaw > 0) getYaw(&part2yaw);
+    } else if (part2yaw < 0) {
+        setSpeed(TURNLEFT , TURN_PWM, TURN_PWM);
+        while (part2yaw < 0) getYaw(&part2yaw);
+    }
     stopTheCar();
     
-    now = Ten_Times_Trig (middle_trigger);
-    while (now >= FORWARD_II_DIS + 50 || now <= FORWARD_II_DIS - 50) {
-        if (now > FORWARD_II_DIS) {                         // Insure the car stop at the right position
-            do {
-                setSpeed(FORWARDS, 10, 10);
-                delay_ms(INTERVAL >> 1);
-                stopTheCar();
-                now = Ten_Times_Trig (middle_trigger);
+    setSpeed(FORWARDS, 20, 20);
+    delay_ms(200);
+    stopTheCar();
+}
+
+
+void turnInner(void) {
+    while(getYaw(&last_yaw));
+    setSpeed(inner_turn, TURN_PWM, TURN_PWM);
+    now_yaw = 0;
+    while (now_yaw < 82) {
+        while(getYaw(&now_yaw));
+        now_yaw = now_yaw > last_yaw ? now_yaw-last_yaw : last_yaw - now_yaw;
 
 #if (__DEBUG__ == __ON__)
-                printf("upwardSlope : now = %u\r\n [bigger]", now);
+        printf("In turnInner()\n");
+#endif
+        
+    } 
+    stopTheCar();
+}
+
+
+void turnOuter(void) {
+    while(getYaw(&last_yaw));
+    setSpeed(outer_turn, TURN_PWM, TURN_PWM);
+    now_yaw = 0;
+    while (now_yaw < 80) {
+        while(getYaw(&now_yaw));
+        now_yaw = now_yaw > last_yaw ? now_yaw-last_yaw : last_yaw - now_yaw;
+    } 
+    stopTheCar();
+}
+
+
+void upwardSlope(void) {             
+    setSpeed(FORWARDS, 80, 80);
+    delay_ms(1200);
+    stopTheCar();
+    now_sonic = Ten_Times_Trig(MIDDLE_TRIGGER);
+
+#if (__DEBUG__ == __ON__)
+    printf("sonic: %5d\r\n", now_sonic);
+#endif
+    
+    while (now_sonic < 2050 || now_sonic > 2300) {
+        if (now_sonic < 2050) {
+            setSpeed(BACKWARDS, 40, 40);
+            delay_ms(10);
+            now_sonic = Ten_Times_Trig(MIDDLE_TRIGGER);
+
+#if (__DEBUG__ == __ON__)
+            printf("sonic: %5d\r\n", now_sonic);
 #endif
             
-            } while (now > FORWARD_II_DIS);
-        } else if (now < FORWARD_II_DIS) {
-            do {
-                setSpeed(BACKWARDS, 10, 10);
-                delay_ms(INTERVAL >> 1);
-                stopTheCar();
-                now = Ten_Times_Trig (middle_trigger); 
-            
+        } else if (now_sonic > 2300) {
+            setSpeed(FORWARDS, 40, 40);
+            delay_ms(10);
+            now_sonic = Ten_Times_Trig(MIDDLE_TRIGGER);
+
 #if (__DEBUG__ == __ON__)
-                printf("upwardSlope : now = %u\r\n [smaller]", now);
-#endif          
+            printf("sonic: %5d\r\n", now_sonic);
+#endif
             
-            } while (now < FORWARD_II_DIS);
         }
     }
-    
 }
 
 
-void Final_Charge (uint8_t _direction) {
-    // Define innner and outer pins
-    pinsDef(_direction);
+void finishPart3(uint8_t _dir, float part2yaw) { 
+    correctDir(part2yaw);
+    dirDef(_dir);
+    turnInner();
+
+    setSpeed(FORWARDS, 22, 22);
+    delay_ms(700);
+    stopTheCar();
     
-    turnInner(_direction);
-    forwardToSlope(_direction);
-    //turnOuter(_direction);
-    if (_direction)
-        setSpeed(TURNRIGHT, 95, 95);
-    else
-        setSpeed(TURNLEFT , 95, 95);
-    delay_ms(200);
+#if (__DEBUG__ == __ON__)
+    printf("Forward 1 was over!\n");
+#endif
     
-    upwardSlope(_direction);
+    turnOuter();
     
+    do {
+        setSpeed(FORWARDS, 22, 22);
+    } while (Ten_Times_Trig(MIDDLE_TRIGGER) > 1400);
+    
+    turnOuter();   
+    upwardSlope();    
+    stopTheCar();
+    putArmLow();
     while(1);
 }
+
+/******************* (C) COPYRIGHT 2016 Yuuki_Dach *************END OF FILE****/

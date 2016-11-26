@@ -1,15 +1,15 @@
 /**
   ******************************************************************************
-  * @author  			 Yuuki_Dach
-  * @version 			 V1.1.1
+  * @author        Yuuki_Dach
+  * @version       V1.1.1
   * @date          7-November-2016
   * @description   Functions of controller. 
   ******************************************************************************
   * @attention
   *
   * OUR CONTROLLER IS PS2 WHICH HAS A HIGH COST-EFFECTIVE. ITS INSTRUCTIONS CAN
-	* BE DOWNLOADED FROM THE INTERNET. OR YOU CAN FIND SOME OF THEM IN MY GITHUB'S
-	* PROJECTS FILES. MY GITHUB IS: https://github.com/yuukidach .
+  * BE DOWNLOADED FROM THE INTERNET. OR YOU CAN FIND SOME OF THEM IN MY GITHUB'S
+  * PROJECTS FILES. MY GITHUB IS: https://github.com/yuukidach .
   *
   * <h2><center>&copy; COPYRIGHT 2016 Yuuki_Dach</center></h2>
   ******************************************************************************
@@ -266,8 +266,8 @@ void PS2_Vibration(u8 motor1, u8 motor2){
 
 uint8_t isAutoControl(void) {
     if(getButtonData() == PSB_L1) {
-        for (int i = 0; i < 50; ++i) while(getButtonData() == PSB_L1);
-            ++cnt;
+        for (int i = 0; i < 48; ++i) while(getButtonData() == PSB_L1);
+        ++cnt;
     }
     if (cnt & 0x1) {
         GPIO_SetBits(GPIOE, GPIO_Pin_5);
@@ -286,8 +286,20 @@ uint8_t isAutoControl(void) {
  *         PART3LEFT  (0): Means turning left at part 3
  */
 uint8_t getPart3Direction(void) {
-    if (getButtonData() == PSB_SELECT)
+    uint8_t i = 0;
+    for (i = 0; i < 10; ++i) while(getButtonData() == PSB_L2);
+    if (i == 10 && getButtonData() == PSB_L2) {        
         part3Dir = PART3RIGHT;
+    }
     return part3Dir;
 }
 /******************* (C) COPYRIGHT 2016 Yuuki_Dach *************END OF FILE****/
+
+
+
+
+
+
+
+
+
