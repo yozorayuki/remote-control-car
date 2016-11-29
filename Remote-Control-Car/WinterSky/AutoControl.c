@@ -19,25 +19,45 @@ u8 nToward = 2, nTurn = 2;
 
 
 void AutoControlConfig(void) {
-	RCC_APB2PeriphClockCmd(TRACK_RCC, ENABLE);
-	
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
+	RCC_APB2PeriphClockCmd(TRACK_RCC, ENABLE);
 	//≈‰÷√GPIOŒ™∏°ø’ ‰»Î
-	GPIO_InitStructure.GPIO_Pin = TRACK_FL | TRACK_FR | TRACK_BL | TRACK_BR;
+	GPIO_InitStructure.GPIO_Pin = TRACK_L1 | TRACK_L2 | TRACK_L3 | TRACK_L4;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 	GPIO_Init(TRACK_GPIO, &GPIO_InitStructure);
+	
+	RCC_APB2PeriphClockCmd(CHECK_RCC, ENABLE);
+	
+	GPIO_InitStructure.GPIO_Pin = CHECK_L1 | CHECK_L2 | CHECK_L3 | CHECK_L4;
+	GPIO_Init(CHECK_GPIO, &GPIO_InitStructure);
 }
 
 
 u8 TrackCheck(void) {
 	u8 re = 0;
-	re += GPIO_ReadInputDataBit(TRACK_GPIO, TRACK_FL);
-	re += GPIO_ReadInputDataBit(TRACK_GPIO, TRACK_FR)<<1;
-	re += GPIO_ReadInputDataBit(TRACK_GPIO, TRACK_BR)<<2;
-	re += GPIO_ReadInputDataBit(TRACK_GPIO, TRACK_BL)<<3;
+	re += GPIO_ReadInputDataBit(TRACK_GPIO, TRACK_L1);
+	re += GPIO_ReadInputDataBit(TRACK_GPIO, TRACK_L2)<<1;
+	re += GPIO_ReadInputDataBit(TRACK_GPIO, TRACK_L3)<<2;
+	re += GPIO_ReadInputDataBit(TRACK_GPIO, TRACK_L4)<<3;
 	return re;
 }
+
+
+u8 getLeft(void) {
+	return 1 - GPIO_ReadInputDataBit(CHECK_GPIO, CHECK_L1);
+}
+
+
+u8 getRight(void) {
+	return 1 - GPIO_ReadInputDataBit(CHECK_GPIO, CHECK_L4);
+}
+
+
+u8 getBottom(void) {
+	return GPIO_ReadInputDataBit(CHECK_GPIO, CHECK_L2);
+}
+
 
 void LightCheck(void) {
 	int flag = 0;
@@ -156,11 +176,13 @@ void Tracking(u8 _nD) {
 
 
 void PreDeal(void) {
+	/*
 	stopTheCar();
 	while(getYaw(&dYaw));
 	setSpeed(0, DS2, DS2);
+	*/
 	
-	TaskStart(1000);
+	TaskStart(800);
 	while(Tasking()) {
 		Tracking(0);
 		LightCheck();
@@ -168,12 +190,14 @@ void PreDeal(void) {
 	TaskClose();
 	
 	stopTheCar();
-	delay_ms(200);
+	delay_ms(50);
 }
 
 
 void Finding(u8 _nD, u8 _nT) {
+#ifdef _DEBUG_MODE
 	printf(":light is seeked\n");
+#endif
 	
 	stopTheCar();
 	delay_ms(50);
@@ -200,11 +224,11 @@ void Finding(u8 _nD, u8 _nT) {
 	}
 	
 	setSpeed(1, DS1, DS1);
-	delay_ms(900);
+	delay_ms(600);
 	
 	setSpeed(0, DS1, DS1);
 	delay_ms(150);
-	while(AD_Value[8] < 250);
+	while(!getBottom());
 	
 	setSpeed(2+_nT, TS2, TS2);
 	
@@ -227,8 +251,11 @@ void Finding(u8 _nD, u8 _nT) {
 	}
 	
 	stopTheCar();
-	printf("light is finded\n");
 	bFind = 0;
+	
+#ifdef _DEBUG_MODE
+	printf("light is finded\n");
+#endif
 	
 	delay_ms(50);
 }
@@ -238,51 +265,59 @@ void Seeking(void) {
 	LightCheck();
 	
 	if(nToward == 2) {
+		Tracking(0);
+		u32 iDistance = Ten_Times_Trig(GPIO_Pin_7);
+		
+#ifdef _DEBUG_MODE
 		printf(":NO LIGHT\n");
 		ADC_PrintValue();
-		Tracking(0);
-		
-		u32 iDistance = Ten_Times_Trig(GPIO_Pin_7);
 		printf("::DISTANCE %u\n", iDistance);
+#endif
 		
-		if(Ten_Times_Trig(GPIO_Pin_7) > 1 && Ten_Times_Trig(GPIO_Pin_7) < DISTANCE) {
-			LightCheck();
-			if(nToward == 2) {
+		if(AD_Value[8] > COLOR_F) {
+            while(iDistance > 65530 && iDistance < 2) {
+                iDistance = Ten_Times_Trig(GPIO_Pin_7);
+            }
+			if(iDistance < 3000) {
 				stopTheCar();
-				bSeek = 0;
-				printf("distance limit\n");
+#ifdef _DEBUG_MODE
+				printf("door is not open\n");
+#endif
 			}
 		}
 		
-		if(AD_Value[9] > 1250 && iDistance > 1 && iDistance < 10000) {
-			bSeek = 0;
-			stopTheCar();
-			printf("color limit\n");
+		if(AD_Value[9] > COLOR_B) {
+            while(iDistance > 65530 && iDistance < 2) {
+                iDistance = Ten_Times_Trig(GPIO_Pin_7);
+            }
+            if(iDistance < 10000) {
+                bSeek = 0;
+                stopTheCar();
+            }
 		}
 		
 		return;
 	}
 	
-	if(nToward)
-		printf(":BACK  ");
-	else
-		printf(":FRONT ");
-	
 	Tracking(nToward);
 	
-	printf("%4d, %4d, %4d, %4d - %4d, %4d, %4d, %4d\n", AD_Value[0], AD_Value[1], AD_Value[2], AD_Value[3], AD_Value[4], AD_Value[5], AD_Value[6], AD_Value[7]);
-	printf("       left    %4d, right   %4d\n", AD_Value[10], AD_Value[11]);
+#ifdef _DEBUG_MODE
+	if(nToward)
+		printf(":BACK\n");
+	else
+		printf(":FRONT\n");
+    ADC_PrintValue();
+#endif
 	
-	if(AD_Value[10] < 1600) {
+	if(getLeft()) {
 		bFind = 1;
 		nTurn = 0;
-	} else if(AD_Value[11] < 1600) {
+	} else if(getRight()) {
 		bFind = 1;
 		nTurn = 1;
 	}
 	
-	if(nToward == 0 && Ten_Times_Trig(GPIO_Pin_7) > 1 && Ten_Times_Trig(GPIO_Pin_7) < DISTANCE) {
-		printf("seek distance limit\n");
+	if(nToward == 0 && AD_Value[8] > COLOR_F) {
 		if(AD_Value[0] > 1000 && AD_Value[0] > AD_Value[3]) {
 			bFind = 1;
 			nTurn = 1;
@@ -290,7 +325,7 @@ void Seeking(void) {
 			bFind = 1;
 			nTurn = 0;
 		}
-	} else if(nToward == 1 && AD_Value[9] > 1250) {
+	} else if(nToward == 1 && AD_Value[9] > COLOR_B) {
 		if(AD_Value[4] > 1000 && AD_Value[4] > AD_Value[7]) {
 			bFind = 1;
 			nTurn = 0;
@@ -314,5 +349,10 @@ float AutoControl(void) {
 	while(bSeek) {
 		Seeking();
 	}
+	
+#ifdef _DEBUG_MODE
+	printf("part two is ended\n");
+#endif
+	
 	return dYaw;
 }

@@ -32,6 +32,10 @@
 
 uint8_t dir_in3 = PART3LEFT;
 
+#if (__DEBUG__ == __ON__)
+    uint8_t cnt_part3 = 0;
+#endif 
+
 int main(void) {
     delay_init(72);
 
@@ -62,12 +66,16 @@ int main(void) {
             //uint8_t mode = getButtonData();
             //if (mode == PSB_START)
             //    printf("7 : %u\r\n", Ultrasonic_Trig(GPIO_Pin_7));
-            //printf("dir is: %5d \n", dir_in3);
+            if (dir_in3) {
+                ++cnt_part3;
+                if (cnt_part3 > 250) cnt_part3 = 2;
+                if (cnt_part3 == 1) printf("dir is RIGHT!!!\n.");
+            }
             
-            if(getButtonData() == PSB_L2) {
+            if(getButtonData() == PSB_START) {
 				ADC_PrintValue();
 				printf("::%u\n", Ten_Times_Trig(GPIO_Pin_7));
-				while(getButtonData() == PSB_L2);
+				while(getButtonData() == PSB_START);
 			}
 #endif
   

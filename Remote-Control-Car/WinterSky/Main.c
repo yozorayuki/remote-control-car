@@ -27,7 +27,7 @@
 #include "precompile.h"
 
 #include "sys.h"
-#include "mpu6050.h" 
+#include "mpu6050.h"
 #include "mpuiic.h"
 #include "inv_mpu.h"
 #include "inv_mpu_dmp_motion_driver.h" 
@@ -41,6 +41,7 @@ int main(void) {
     Controller_Config();
     Tire_Config();
     Arm_Config();
+    Ultrasonic_Init();
 	ADC_Config();
     AutoControlConfig();
 	
@@ -50,9 +51,6 @@ int main(void) {
     WIFI_ConnectToServer();
     delay_ms(100);
     printf("\nTCP Connected\n");
-	
-    Ultrasonic_Init();
-	printf("Ultrasonic Init OK\n");
 	
 	MPU_Init();					//初始化MPU6050
 	printf("MPU Init OK\n");
@@ -80,19 +78,18 @@ int main(void) {
         } else if (isAutoControl()){
 			if(!str) {
 				str = 1;
-				/*
+				
 				int _nT = 0;
 				
 				setSpeed(0, DS1, DS1);
 				delay_ms(150);
-				while(AD_Value[8] < 250);
-				//while(!(TrackCheck()&3));
+				while(!getBottom());
 				
 				setSpeed(2+_nT, TS2, TS2);
 				
 				switch(_nT) {
 					case 1:
-						target = dYaw + 5;
+						target = dYaw + 7;
 						while(getYaw(&yaw));
 						while(yaw > target) {
 							getYaw(&yaw);
@@ -100,7 +97,7 @@ int main(void) {
 						break;
 					
 					case 0:
-						target = dYaw - 5;
+						target = dYaw - 7;
 						while(getYaw(&yaw));
 						while(yaw < target) {
 							getYaw(&yaw);
@@ -109,10 +106,10 @@ int main(void) {
 				}
 				
 				stopTheCar();
-				*/
+				
 			}
 			
-			AutoControl();
+			//AutoControl();
             //Final_Charge (PART3RIGHT); // dir == PART3LEFT(0) or PART3RIGHT(1)
         } 
     }

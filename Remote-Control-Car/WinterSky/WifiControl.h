@@ -3,9 +3,11 @@
 
 #include <stm32f10x.h>
 
+//#define _HOST "10.18.196.202"
 #define _HOST "10.18.75.217"
 //#define _HOST "172.16.9.18"
-#define _PORT 5432
+
+#define _PORT 8080
 
 
 extern u8 bConnected;

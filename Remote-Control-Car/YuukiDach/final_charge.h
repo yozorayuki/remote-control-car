@@ -20,7 +20,7 @@
 
 #define MIDDLE_TRIGGER GPIO_Pin_7
 
-#define TURN_PWM 80
+#define TURN_PWM 90
 
 #define INNER_TIME 100
 #define FORWARD_I_TIME 700
